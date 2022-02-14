@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 import { STYLE, COLOR } from '@constants';
+import { Item } from '@components/common';
 import { useData } from '@hooks/useData';
 import { ConItem } from '@types';
 
 export const MainDeal = () => {
-  const { dataList } = useData('con-items/soon');
-  console.log(dataList);
+  const { data } = useData('con-items/soon');
+  const dataList = data && data[Object.keys(data)[0]];
 
   return (
     <MainDealContainer>
@@ -14,9 +15,12 @@ export const MainDeal = () => {
         오늘의 땡처리콘!
       </h3>
       <DealItems>
-        {dataList.map((item: ConItem) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
+        {dataList &&
+          dataList.map((item: ConItem) => (
+            <li key={item.id}>
+              <Item item={item} />
+            </li>
+          ))}
       </DealItems>
     </MainDealContainer>
   );
@@ -26,6 +30,7 @@ const MainDealContainer = styled.section`
   h3 {
     font-size: 16px;
     padding-left: ${STYLE.PADDING};
+    margin-bottom: 14px;
 
     span {
       display: block;
