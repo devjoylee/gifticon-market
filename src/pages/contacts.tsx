@@ -1,7 +1,12 @@
+import { QnAContainer } from '@components/layout/QnA';
 import { NextPage } from 'next';
 
 const ContactsPage: NextPage = () => {
-  return <section>고객 센터 페이지</section>;
+  return (
+    <div>
+      <QnAContainer />
+    </div>
+  );
 };
 
 export default ContactsPage;
