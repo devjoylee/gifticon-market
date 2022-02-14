@@ -1,3 +1,4 @@
+import { Carousel } from '@components/carousel/Carousel';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import styled from '@emotion/styled';
@@ -13,7 +14,7 @@ const Home: NextPage = () => {
       </Head>
       <MainHeader />
       <MainPage>
-        <div>Carousel</div>
+        <Carousel />
         <MainCategory />
         <div>오늘의 땡처리콘!</div>
       </MainPage>
