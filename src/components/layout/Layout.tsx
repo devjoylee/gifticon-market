@@ -1,20 +1,12 @@
 import styled from '@emotion/styled';
-import {
-  MenuOutlined,
-  SearchOutlined,
-  CreditCardOutlined,
-} from '@ant-design/icons';
 import { COLOR } from '@constants';
+import { Header } from './';
 
 export const Layout: React.FC = ({ children }) => {
   return (
     <Container>
-      <div>
-        <MenuOutlined />
-        <SearchOutlined />
-        <CreditCardOutlined />
-      </div>
-      <main>{children}</main>
+      <Header title="카테고리명" />
+      <>{children}</>
     </Container>
   );
 };
@@ -23,5 +15,5 @@ const Container = styled.div`
   margin: 0 auto;
   max-width: 672px;
   width: 100vw;
-  background-color: ${COLOR.WHITE};
+  background-color: ${COLOR.GRAY};
 `;
