@@ -2,46 +2,55 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { useData } from '@hooks/useData';
 import { COLOR } from '@constants';
+import { QTD } from '@types';
+import { QnAContent } from '.';
 
 interface Toggle {
-  toggle: boolean;
+  toggle: number;
 }
 
-export const OftenQnA = () => {
-  const [toggle, setToggle] = useState(true);
+export const OftenQnA = ({ QnATypeData }: QTD) => {
+  const [toggle, setToggle] = useState(QnATypeData[0].id);
   const handleBuyBtn = () => {
-    if (!toggle) setToggle(!toggle);
+    if (toggle === QnATypeData[1].id) setToggle(QnATypeData[0].id);
   };
   const handleSellBtn = () => {
-    if (toggle) setToggle(!toggle);
+    if (toggle === QnATypeData[0].id) setToggle(QnATypeData[1].id);
   };
-  const { data: QnATypeData, error: QnATypeError } = useData('qa-types');
+
   const { data: QnAContentData, error: QnAContentError } = useData(
     'qas',
-    `qaTypeId=${toggle ? 1 : 2}`
+    `qaTypeId=${toggle}`
   );
-  if (!QnATypeData || !QnAContentData) return <div>로딩중..</div>;
-  if (QnATypeError || QnAContentError) return <div>페이지 에러</div>;
-  console.log(QnATypeData);
+  if (!QnAContentData) return <div>로딩중..</div>;
+  if (QnAContentError) return <div>페이지 에러</div>;
   console.log(QnAContentData);
 
   return (
-    <Container>
-      <Title>자주 묻는 질문</Title>
-      <ToggleContainer>
-        <BuyBtn type="button" toggle={toggle} onClick={handleBuyBtn}>
-          구매
-        </BuyBtn>
-        <SellBtn type="button" toggle={!toggle} onClick={handleSellBtn}>
-          판매
-        </SellBtn>
-      </ToggleContainer>
-    </Container>
+    <div>
+      <Container>
+        <Title>자주 묻는 질문</Title>
+        <ToggleContainer>
+          <BuyBtn type="button" toggle={toggle} onClick={handleBuyBtn}>
+            {QnATypeData[0].name}
+          </BuyBtn>
+          <SellBtn type="button" toggle={toggle} onClick={handleSellBtn}>
+            {QnATypeData[1].name}
+          </SellBtn>
+        </ToggleContainer>
+      </Container>
+      <QnAContent
+        QnAContentData={QnAContentData.qas}
+        name={QnATypeData[toggle - 1].name}
+      />
+    </div>
   );
 };
 
 const Container = styled.article`
   padding: 15px 15px 0 15px;
+  background-color: ${COLOR.WHITE};
+  border-bottom: 12px solid ${COLOR.GRAY_BORDER};
 `;
 const Title = styled.h2`
   font-size: 20px;
@@ -50,16 +59,18 @@ const Title = styled.h2`
 const ToggleContainer = styled.div``;
 const BuyBtn = styled.button<Toggle>`
   padding: 15px 0;
-  color: ${({ toggle }) => (toggle ? COLOR.RED : COLOR.BLACK)};
-  border-bottom: 2px solid ${({ toggle }) => (toggle ? COLOR.RED : COLOR.WHITE)};
+  color: ${({ toggle }) => (toggle === 1 ? COLOR.RED : COLOR.BLACK)};
+  border-bottom: 2px solid
+    ${({ toggle }) => (toggle === 1 ? COLOR.RED : COLOR.WHITE)};
   width: 50%;
   cursor: pointer;
 `;
 const SellBtn = styled.button<Toggle>`
   padding: 15px 0;
   margin-top: 20px;
-  color: ${({ toggle }) => (toggle ? COLOR.RED : COLOR.BLACK)};
-  border-bottom: 2px solid ${({ toggle }) => (toggle ? COLOR.RED : COLOR.WHITE)};
+  color: ${({ toggle }) => (toggle === 2 ? COLOR.RED : COLOR.BLACK)};
+  border-bottom: 2px solid
+    ${({ toggle }) => (toggle === 2 ? COLOR.RED : COLOR.WHITE)};
   width: 50%;
   cursor: pointer;
 `;

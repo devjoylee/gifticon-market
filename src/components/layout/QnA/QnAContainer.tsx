@@ -1,11 +1,13 @@
+import { QTD } from '@types';
 import React from 'react';
 import { OftenQnA, OneOnOne } from '.';
 
-export const QnAContainer = () => {
+export const QnAContainer = ({ QnATypeData }: QTD) => {
   return (
-    <div>
+    <section>
+      <h1 className="sr-only">고객 상담 페이지</h1>
       <OneOnOne />
-      <OftenQnA />
-    </div>
+      <OftenQnA QnATypeData={QnATypeData} />
+    </section>
   );
 };

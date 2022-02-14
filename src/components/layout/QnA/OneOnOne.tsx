@@ -17,7 +17,8 @@ export const OneOnOne = () => {
 };
 
 const Container = styled.article`
-  padding: 0 15px;
+  padding: 80px 15px 0 15px;
+  background-color: ${COLOR.WHITE};
   border-bottom: 12px solid ${COLOR.GRAY};
 `;
 const Title = styled.h2`
