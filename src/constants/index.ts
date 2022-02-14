@@ -7,6 +7,7 @@ export const COLOR = {
   GRAY: '#F1F3F4',
   GRAY_DARK: '#808080',
   GRAY_FONT: '#999999',
+  GRAY_BORDER: '#EBECED',
   RED: '#FF5757',
 };
 
