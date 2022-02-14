@@ -6,6 +6,7 @@ export const COLOR = {
   BLACK: '#000000',
   GRAY: '#F1F3F4',
   GRAY_DARK: '#808080',
+  GRAY_BORDER: '#EBECED',
   RED: '#FF5757',
 };
 
