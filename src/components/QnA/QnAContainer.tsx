@@ -1,8 +1,8 @@
-import { QTD } from '@types';
+import { QTDProps } from '@types';
 import React from 'react';
 import { OftenQnA, OneOnOne } from '.';
 
-export const QnAContainer = ({ QnATypeData }: QTD) => {
+export const QnAContainer = ({ QnATypeData }: QTDProps) => {
   return (
     <section>
       <h1 className="sr-only">고객 상담 페이지</h1>
