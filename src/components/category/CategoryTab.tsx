@@ -13,7 +13,6 @@ export const CategoryTab = () => {
   useEffect(() => {
     data && setCategories(data.conCategory1s);
   }, [data]);
-  console.log(categories);
 
   return (
     <TabSection>

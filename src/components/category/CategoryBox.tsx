@@ -18,7 +18,6 @@ export const CategoryBox = ({ id }: Props) => {
   useEffect(() => {
     data && setCategories(data.conCategory1.conCategory2s);
   }, [data]);
-  console.log(categories);
 
   return (
     <CategoryContainer>
