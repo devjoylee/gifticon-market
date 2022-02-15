@@ -30,6 +30,7 @@ export const HeaderContainer = styled.header`
   height: ${STYLE.HEADER_H};
   padding: 0 ${STYLE.PADDING};
   background-color: ${COLOR.WHITE};
+  z-index: 999;
 
   span.anticon {
     display: inline-block;
