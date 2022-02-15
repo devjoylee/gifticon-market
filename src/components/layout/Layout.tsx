@@ -1,11 +1,15 @@
 import styled from '@emotion/styled';
 import { COLOR, STYLE } from '@constants';
 import { Header } from './';
+import { useRouter } from 'next/router';
 
 export const Layout: React.FC = ({ children }) => {
+  const router = useRouter();
+  const { id } = router.query;
+
   return (
     <Container>
-      <Header title="카테고리명" />
+      {id && <Header id={id} />}
       <>{children}</>
     </Container>
   );
