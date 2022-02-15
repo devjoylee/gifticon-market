@@ -3,6 +3,7 @@ import { ItemBox } from '@components/common';
 import { useData } from '@hooks/useData';
 import { ConItem } from '@types';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export const DealList = () => {
   const [items, setItems] = useState<ConItem[]>();
@@ -17,7 +18,11 @@ export const DealList = () => {
       {items &&
         items.map((item: ConItem) => (
           <li key={item.id}>
-            <ItemBox item={item} />
+            <Link href={`/items/${item.id}`} passHref>
+              <a>
+                <ItemBox item={item} />
+              </a>
+            </Link>
           </li>
         ))}
     </DealListContainer>
