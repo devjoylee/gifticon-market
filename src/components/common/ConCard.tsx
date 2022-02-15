@@ -10,7 +10,7 @@ interface CategoryProps {
 export const ConCard = ({ category }: CategoryProps) => {
   return (
     <LinkBox>
-      <Link href={`/brands/${category.id}passHref`} key={category.id}>
+      <Link href={`/categories/${category.id}`} passHref key={category.id}>
         <a>
           <img src={category.imageUrl} />
           <span>{category.name}</span>

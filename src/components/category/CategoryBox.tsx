@@ -1,23 +1,31 @@
+import React from 'react';
 import { useEffect, useState } from 'react';
+import { CategoryTab } from './CategoryTab';
 import { ConCard } from '@components/common';
 import { useData } from '@hooks/useData';
-import { Category } from '@types';
+import { ConCategory1 } from '@types';
 import { STYLE } from '@constants';
 import styled from '@emotion/styled';
 
-export const MainCategory = () => {
-  const { data } = useData(`con-category1s`);
-  const [categories, setCategories] = useState<Category[]>();
+interface Props {
+  id: string | string[];
+}
+
+export const CategoryBox = ({ id }: Props) => {
+  const { data } = useData(`con-category1s/${id}/nested`);
+  const [categories, setCategories] = useState<ConCategory1[]>();
 
   useEffect(() => {
-    data && setCategories(data.conCategory1s);
+    data && setCategories(data.conCategory1.conCategory2s);
   }, [data]);
+  console.log(categories);
 
   return (
     <CategoryContainer>
+      <CategoryTab />
       <ul>
         {categories &&
-          categories.map((category: Category) => (
+          categories.map((category: ConCategory1) => (
             <ConCard key={category.id} category={category} />
           ))}
       </ul>
@@ -26,10 +34,10 @@ export const MainCategory = () => {
 };
 
 const CategoryContainer = styled.section`
-  padding: ${STYLE.PADDING};
   ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 3px;
+    padding: ${STYLE.PADDING};
   }
 `;
