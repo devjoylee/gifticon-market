@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { COLOR } from '@constants';
+import styled from '@emotion/styled';
 import { useData } from '@hooks/useData';
 import { ConCategory2 } from '@types';
 import Link from 'next/link';
@@ -24,7 +26,7 @@ export const ItemList = ({ id, categoryId }: ItemListProps) => {
   }, [brand, data, id]);
 
   return (
-    <ul>
+    <ItemListContainer>
       {brand &&
         brand.conItems.map(item => (
           <li key={item.id}>
@@ -35,6 +37,10 @@ export const ItemList = ({ id, categoryId }: ItemListProps) => {
             </Link>
           </li>
         ))}
-    </ul>
+    </ItemListContainer>
   );
 };
+
+const ItemListContainer = styled.ul`
+  border-top: 1px solid ${COLOR.GRAY_BORDER};
+`;

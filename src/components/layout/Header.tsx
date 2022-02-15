@@ -2,21 +2,54 @@ import Link from 'next/link';
 import styled from '@emotion/styled';
 import { HomeOutlined } from '@ant-design/icons';
 import { COLOR, STYLE } from '@constants';
+import { useData } from '@hooks/useData';
+import { ConCategory2 } from '@types';
+import { useRef, useState, useEffect } from 'react';
+import Head from 'next/head';
 
-interface HeaderProps {
-  title: string;
+interface Props {
+  id: string | string[];
 }
 
-export const Header = ({ title }: HeaderProps) => {
+interface Title {
+  id: number;
+  name: string;
+}
+
+export const Header = ({ id }: Props) => {
+  const categoryId = useRef(id);
+  const { data } = useData(`con-category1s/${categoryId.current}/nested`);
+  const brandTitle = useRef<Title[]>([]);
+  const [title, setTitle] = useState('');
+
+  useEffect(() => {
+    if (data) {
+      data.conCategory1.conCategory2s.map((brand: ConCategory2) => {
+        brandTitle.current.push({ id: brand.id, name: brand.name });
+      });
+      setTitle(data.conCategory1.name);
+    }
+
+    brandTitle.current.forEach(
+      brand => brand.id === Number(id) && setTitle(brand.name)
+    );
+    brandTitle.current = [];
+  }, [data, id, title]);
+
   return (
-    <HeaderContainer>
-      <Link href="/">
-        <a>
-          <HomeOutlined />
-        </a>
-      </Link>
-      <h2>{title}</h2>
-    </HeaderContainer>
+    <>
+      <Head>
+        <title>니콘내콘 - {title}</title>
+      </Head>
+      <HeaderContainer>
+        <Link href="/">
+          <a>
+            <HomeOutlined />
+          </a>
+        </Link>
+        <h2>{title}</h2>
+      </HeaderContainer>
+    </>
   );
 };
 
