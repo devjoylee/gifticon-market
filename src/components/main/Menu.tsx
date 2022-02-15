@@ -34,15 +34,16 @@ export const Menu = ({ menu, setMenu }: Props) => {
 
 const Container = styled.section<isMenu>`
   position: absolute;
-  z-index: 200;
   top: 0;
   left: ${({ menu }) => (!menu ? `-${STYLE.MAIN_WIDTH}` : 0)};
   width: inherit;
   height: 100vh;
   max-width: inherit;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.2s ease-in-out;
   background-color: ${COLOR.WHITE};
+  z-index: 1000;
 `;
+
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -50,17 +51,28 @@ const Header = styled.div`
   height: ${STYLE.HEADER_H};
   padding: 0 ${STYLE.PADDING};
   background-color: ${COLOR.WHITE};
-  border-bottom: 12px solid ${COLOR.GRAY};
-  svg {
+  border-bottom: 1px solid ${COLOR.GRAY};
+  span {
     font-size: 24px;
     cursor: pointer;
+    z-index: 1000;
+  }
+  p {
+    font-size: 17px;
+    font-weight: 700;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
   }
 `;
+
 const Contacts = styled.a`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px;
   background-color: ${COLOR.WHITE};
+  border-top: 12px solid ${COLOR.GRAY};
   border-bottom: 12px solid ${COLOR.GRAY};
 `;

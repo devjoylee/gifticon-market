@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useData } from '@hooks/useData';
 import { ConCategory2 } from '@types';
-import { ItemLink } from './ItemLink';
+import Link from 'next/link';
+import { ItemBox } from '../common';
 
 interface ItemListProps {
   id: string | string[];
@@ -27,7 +28,11 @@ export const ItemList = ({ id, categoryId }: ItemListProps) => {
       {brand &&
         brand.conItems.map(item => (
           <li key={item.id}>
-            <ItemLink item={item} />
+            <Link href={`/items/${item.id}`} passHref>
+              <a>
+                <ItemBox item={item} />
+              </a>
+            </Link>
           </li>
         ))}
     </ul>
