@@ -3,20 +3,52 @@ import styled from '@emotion/styled';
 import { Options } from '@types';
 import { COLOR } from '@constants';
 import { OptionContent } from './OptionContent';
+import { OptionSelected } from './OptionSelected';
+import { CloseOutlined } from '@ant-design/icons';
 
 interface Props {
   options: Options[];
   isOpen: boolean;
-  dcRate: number | undefined;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  dcRate?: number;
+  setSelOtion: Dispatch<SetStateAction<Options | undefined>>;
+  selOption?: Options;
 }
-export const OptionList = ({ options, isOpen, dcRate }: Props) => {
+interface StyleProps {
+  optionBoxHeight: string;
+}
+
+export const OptionList = ({
+  options,
+  isOpen,
+  setIsOpen,
+  dcRate,
+  selOption,
+  setSelOtion,
+}: Props) => {
+  const optionBoxHeight = selOption ? '70px' : '280px';
+  const handleClose = () => {
+    setIsOpen(false);
+  };
   return (
     <ListContainer className={isOpen ? 'active' : ''}>
-      <ListHeader>옵션 선택하기</ListHeader>
-      <OptionBox>
-        {options.map((option, i) => (
-          <OptionContent key={`option-${i}`} option={option} dcRate={dcRate} />
-        ))}
+      <ListHeader className={selOption ? 'hide' : ''}>
+        옵션 선택하기
+        <CloseOutlined onClick={handleClose} />
+      </ListHeader>
+      <OptionBox optionBoxHeight={optionBoxHeight}>
+        {selOption ? (
+          <OptionSelected option={selOption} setSelOtion={setSelOtion} />
+        ) : (
+          options.map((option, i) => (
+            <OptionContent
+              key={`option-${i}`}
+              option={option}
+              dcRate={dcRate}
+              setSelOtion={setSelOtion}
+            />
+          ))
+        )}
       </OptionBox>
     </ListContainer>
   );
@@ -27,32 +59,39 @@ const ListContainer = styled.ul`
   z-index: 100;
   max-height: 0;
   width: 100%;
-  bottom: 47px;
+  bottom: 50px;
   transition: all 0.2s ease-in-out;
+  overflow: hidden;
   &.active {
-    max-height: 672px;
+    max-height: 400px;
   }
 `;
 
 const ListHeader = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: 50px;
   padding: 0 17px;
   line-height: 50px;
   background-color: ${COLOR.GRAY};
   font-weight: 500;
-`;
-
-const OptionBox = styled.ul`
-  display: flex;
-  flex-direction: column;
-  height: 280px;
-  overflow: scroll;
-  &::-webkit-scrollbar {
+  svg {
+    font-size: 22px;
+    cursor: pointer;
+  }
+  &.hide {
     display: none;
   }
+`;
+
+const OptionBox = styled.ul<StyleProps>`
+  display: flex;
+  flex-direction: column;
+  height: ${props => props.optionBoxHeight};
+  overflow: scroll;
   background-color: ${COLOR.WHITE};
-  & > li {
-    flex-shrink: 0;
-    height: 70px;
+  &::-webkit-scrollbar {
+    display: none;
   }
 `;
