@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { useData } from '@hooks/useData';
 import { COLOR } from '@constants';
 import { QTDProps } from '@types';
 import { QnAContent } from '.';
@@ -18,13 +17,6 @@ export const OftenQnA = ({ QnATypeData }: QTDProps) => {
     if (toggle === QnATypeData[0].id) setToggle(QnATypeData[1].id);
   };
 
-  const { data: QnAContentData, error: QnAContentError } = useData(
-    'qas',
-    `qaTypeId=${toggle}`
-  );
-  if (!QnAContentData) return <div>로딩중..</div>;
-  if (QnAContentError) return <div>페이지 에러</div>;
-
   return (
     <div>
       <Container>
@@ -38,10 +30,7 @@ export const OftenQnA = ({ QnATypeData }: QTDProps) => {
           </SellBtn>
         </ToggleContainer>
       </Container>
-      <QnAContent
-        QnAContentData={QnAContentData.qas}
-        name={QnATypeData[toggle - 1].name}
-      />
+      <QnAContent name={QnATypeData[toggle - 1].name} toggle={toggle} />
     </div>
   );
 };
