@@ -22,7 +22,7 @@ export const CategoryBox = ({ id }: Props) => {
 
   return (
     <>
-      <CategoryTab />
+      <CategoryTab id={id} />
       {id === '1' ? (
         <DealList />
       ) : (

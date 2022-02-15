@@ -5,12 +5,20 @@ import {
   CreditCardOutlined,
 } from '@ant-design/icons';
 import { HeaderContainer } from '@components/layout/Header';
+import { Dispatch, SetStateAction } from 'react';
 
-export const MainHeader = () => {
+interface Props {
+  setMenu: Dispatch<SetStateAction<boolean>>;
+}
+
+export const MainHeader = ({ setMenu }: Props) => {
+  const handleMenu = () => {
+    setMenu(true);
+  };
   return (
     <MainTop>
       <HeaderContainer>
-        <MenuOutlined />
+        <MenuOutlined onClick={handleMenu} />
         <h2>니콘내콘</h2>
         <div>
           <SearchOutlined />
@@ -22,11 +30,13 @@ export const MainHeader = () => {
 };
 
 const MainTop = styled.div`
-  z-index: 1000;
+  position: relative;
   width: inherit;
   max-width: inherit;
-
   span.anticon:last-child {
     margin-left: 20px;
+  }
+  header > div {
+    z-index: 1000;
   }
 `;

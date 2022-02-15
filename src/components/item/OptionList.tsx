@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from '@emotion/styled';
 import { Options } from '@types';
 import { COLOR } from '@constants';
@@ -6,14 +6,16 @@ import { OptionContent } from './OptionContent';
 
 interface Props {
   options: Options[];
+  isOpen: boolean;
+  dcRate: number | undefined;
 }
-export const OptionList = ({ options }: Props) => {
+export const OptionList = ({ options, isOpen, dcRate }: Props) => {
   return (
-    <ListContainer>
+    <ListContainer className={isOpen ? 'active' : ''}>
       <ListHeader>옵션 선택하기</ListHeader>
       <OptionBox>
         {options.map((option, i) => (
-          <OptionContent key={`option-${i}`} option={option} />
+          <OptionContent key={`option-${i}`} option={option} dcRate={dcRate} />
         ))}
       </OptionBox>
     </ListContainer>
@@ -22,8 +24,14 @@ export const OptionList = ({ options }: Props) => {
 
 const ListContainer = styled.ul`
   position: absolute;
+  z-index: 100;
+  max-height: 0;
   width: 100%;
-  bottom: 80px;
+  bottom: 47px;
+  transition: all 0.2s ease-in-out;
+  &.active {
+    max-height: 672px;
+  }
 `;
 
 const ListHeader = styled.li`
@@ -37,8 +45,12 @@ const ListHeader = styled.li`
 const OptionBox = styled.ul`
   display: flex;
   flex-direction: column;
-  height: 210px;
+  height: 280px;
   overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  background-color: ${COLOR.WHITE};
   & > li {
     flex-shrink: 0;
     height: 70px;

@@ -28,7 +28,7 @@ export const CarouselBox = ({ currentIndex, setCurrentIndex }: Props) => {
   };
   const handleMouseUp = (e: React.MouseEvent<HTMLUListElement>) => {
     const movedDistance = e.pageX - startX;
-    if (Math.abs(movedDistance) >= 100) {
+    if (Math.abs(movedDistance) >= 50) {
       movedDistance > 0
         ? setCurrentIndex(prev => prev - 1)
         : setCurrentIndex(prev => prev + 1);
