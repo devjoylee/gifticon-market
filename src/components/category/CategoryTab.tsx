@@ -5,7 +5,6 @@ import { Category } from '@types';
 import { COLOR } from '@constants';
 import styled from '@emotion/styled';
 import Link from 'next/link';
-import CategoriesPage from '@pages/categories/[id]';
 
 interface Props {
   id: string | string[];
@@ -14,7 +13,6 @@ interface Props {
 export const CategoryTab = ({ id }: Props) => {
   const { data } = useData(`con-category1s`);
   const [categories, setCategories] = useState<Category[]>();
-  const [tab, setTab] = useState<string>('choice');
 
   useEffect(() => {
     data && setCategories(data.conCategory1s);
@@ -24,11 +22,8 @@ export const CategoryTab = ({ id }: Props) => {
     <TabSection>
       {categories &&
         categories.map((category: Category) => (
-          <Link href={`/categories/${category.id}`} passHref key={category.id}>
-            <TabName
-              className={`${tab === 'choice' ? 'active' : ''}`}
-              onClick={() => setTab('choice')}
-            >
+          <Link href={`/categories/${category.id}`} key={category.id} passHref>
+            <TabName className={`${category.id}` === `${id}` ? 'active' : ''}>
               {category.name}
             </TabName>
           </Link>
@@ -42,7 +37,7 @@ const TabName = styled.button`
   height: 41px;
   border-bottom: 1px solid ${COLOR.GRAY_BORDER};
   cursor: pointer;
-  .active {
+  &.active {
     color: ${COLOR.RED};
     border-bottom: 3px solid ${COLOR.RED};
   }

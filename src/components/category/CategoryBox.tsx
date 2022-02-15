@@ -4,7 +4,7 @@ import { CategoryTab } from './CategoryTab';
 import { ConCard } from '@components/common';
 import { useData } from '@hooks/useData';
 import { ConCategory1 } from '@types';
-import { STYLE } from '@constants';
+import { STYLE, COLOR } from '@constants';
 import styled from '@emotion/styled';
 
 interface Props {
@@ -33,6 +33,9 @@ export const CategoryBox = ({ id }: Props) => {
 };
 
 const CategoryContainer = styled.section`
+  overflow: auto;
+  height: 100vh;
+  background-color: ${COLOR.GRAY};
   ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
