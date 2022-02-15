@@ -1,26 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
 import { Options } from '@types';
 import { COLOR } from '@constants';
+import { getDate } from '@utils/getDate';
 
 interface Props {
   option: Options;
+  dcRate: number | undefined;
 }
 
-export const OptionContent = ({ option }: Props) => {
+export const OptionContent = ({ option, dcRate }: Props) => {
+  const date = getDate(option.expireAt);
+  const price = option.sellingPrice.toLocaleString();
   return (
     <OptionBox>
       <div>
         <MainTop>
           <LabelText>유효기간</LabelText>
-          <span>{option.expireAt} 까지</span>
+          <span>{date} 까지</span>
         </MainTop>
         <MainBottom>
           <LabelText>할인가</LabelText>
-          <span>{option.sellingPrice}원</span>
+          <span>{price}원</span>
         </MainBottom>
       </div>
-      <div></div>
+      <DiscounteRate>{dcRate}%</DiscounteRate>
     </OptionBox>
   );
 };
@@ -29,6 +33,7 @@ const OptionBox = styled.li`
   display: flex;
   padding: 0 17px;
   align-items: center;
+  border-bottom: 1px solid ${COLOR.GRAY_BORDER};
 `;
 
 const LabelText = styled.span`
@@ -49,4 +54,8 @@ const MainBottom = styled.div`
   display: flex;
   align-items: center;
 `;
-const DiscounteRate = styled.div``;
+const DiscounteRate = styled.div`
+  color: ${COLOR.RED};
+  font-size: 17px;
+  margin-left: auto;
+`;
