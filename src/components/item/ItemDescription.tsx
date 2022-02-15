@@ -19,7 +19,6 @@ export const ItemDescription = ({ desc }: Props) => {
       descFetch();
     }
   }, [desc]);
-  console.log(descriptions);
   return (
     <DescContainer>
       {descriptions
