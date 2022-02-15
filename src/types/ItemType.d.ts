@@ -27,3 +27,8 @@ export interface Options {
   count: number;
   sellingPrice: number;
 }
+
+export interface Description {
+  label: string;
+  text: string;
+}
