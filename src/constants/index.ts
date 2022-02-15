@@ -8,6 +8,7 @@ export const COLOR = {
   GRAY_DARK: '#808080',
   GRAY_FONT: '#999999',
   GRAY_BORDER: '#EBECED',
+  GRAY_BUTTON: '#CCCCCC',
   RED: '#FF5757',
 };
 
