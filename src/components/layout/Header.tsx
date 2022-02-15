@@ -23,17 +23,17 @@ export const Header = ({ id }: Props) => {
   const [title, setTitle] = useState('');
 
   useEffect(() => {
-    if (data) {
+    if (data && id === categoryId.current) {
       data.conCategory1.conCategory2s.map((brand: ConCategory2) => {
         brandTitle.current.push({ id: brand.id, name: brand.name });
       });
       setTitle(data.conCategory1.name);
+    } else {
+      brandTitle.current.forEach(
+        brand => brand.id === Number(id) && setTitle(brand.name)
+      );
+      brandTitle.current = [];
     }
-
-    brandTitle.current.forEach(
-      brand => brand.id === Number(id) && setTitle(brand.name)
-    );
-    brandTitle.current = [];
   }, [data, id, title]);
 
   return (
