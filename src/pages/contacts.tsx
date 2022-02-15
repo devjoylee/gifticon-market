@@ -1,4 +1,4 @@
-import { QnAContainer } from '@components/layout/QnA';
+import { QnAContainer } from '@components/QnA';
 import { useData } from '@hooks/useData';
 import { NextPage } from 'next';
 
