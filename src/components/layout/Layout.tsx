@@ -19,6 +19,7 @@ const Container = styled.div`
   margin: 0 auto;
   max-width: ${STYLE.MAIN_WIDTH};
   width: 100vw;
-  height: 100%;
+  height: 100vh;
+  overflow: scroll;
   background-color: ${COLOR.GRAY};
 `;
