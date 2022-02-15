@@ -24,7 +24,6 @@ export const OftenQnA = ({ QnATypeData }: QTDProps) => {
   );
   if (!QnAContentData) return <div>로딩중..</div>;
   if (QnAContentError) return <div>페이지 에러</div>;
-  console.log(QnAContentData);
 
   return (
     <div>
