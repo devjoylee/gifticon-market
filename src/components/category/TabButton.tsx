@@ -33,6 +33,7 @@ const TabName = styled.button`
   padding: 10px 14px;
   height: 41px;
   border-bottom: 1px solid ${COLOR.GRAY_BORDER};
+  color: ${COLOR.BLACK};
   cursor: pointer;
   &.active {
     color: ${COLOR.RED};
