@@ -53,4 +53,8 @@ export const HeaderContainer = styled.header`
   a {
     z-index: 999;
   }
+
+  & + section {
+    padding-top: ${STYLE.HEADER_H};
+  }
 `;
