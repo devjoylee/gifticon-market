@@ -7,6 +7,7 @@ import { OptionList } from './OptionList';
 import { COLOR, STYLE } from '@constants';
 import { useData } from '@hooks/useData';
 import { ConItem } from '@types';
+import { ItemBox } from '@components/common/ItemBox';
 
 interface Props {
   id: string | string[];
@@ -20,11 +21,10 @@ export const Item = ({ id }: Props) => {
       setItemData(data.conItem);
     }
   }, [data]);
-  console.log(itemData);
   return (
     itemData && (
       <ItemContainer>
-        <ItemContent itemData={itemData} />
+        <ItemBox item={itemData} />
         <ItemDescription desc={itemData.warning} />
         <OptionList options={itemData.options} />
         <OptionButton />
@@ -35,7 +35,6 @@ export const Item = ({ id }: Props) => {
 
 const ItemContainer = styled.section`
   position: relative;
-  padding-top: ${STYLE.HEADER_H};
   background-color: ${COLOR.WHITE};
   height: 100vh;
 `;
