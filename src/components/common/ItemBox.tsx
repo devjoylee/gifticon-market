@@ -13,7 +13,7 @@ export const ItemBox = ({ item }: ItemProps) => {
       <ItemInfo>
         <BrandName>{item.conCategory2?.name}</BrandName>
         <ItemName>{item.name}</ItemName>
-        <Price className="price">
+        <Price>
           <span className="rate">{item.discountRate}%</span>
           <span className="min">{item.minSellingPrice.toLocaleString()}원</span>
           <span className="origin">
