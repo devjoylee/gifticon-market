@@ -26,8 +26,10 @@ export const ConCard = ({ category }: CategoryProps) => {
         key={category.id}
       >
         <a>
-          <img src={category.imageUrl} />
-          <span>{category.name}</span>
+          <div>
+            <img src={category.imageUrl} />
+            <span>{category.name}</span>
+          </div>
         </a>
       </Link>
     </LinkBox>
@@ -43,9 +45,22 @@ const LinkBox = styled.li`
     border-radius: 0.5rem;
     background: #fff;
     height: 8rem;
+    cursor: default;
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      cursor: pointer;
+      :hover {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+      }
+      transition: -webkit-transform 0.25s ease-out;
+    }
     span {
       margin-top: 10px;
-      font-size: 15px;
+      font-size: 12px;
     }
     img {
       width: 45px;

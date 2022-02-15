@@ -21,7 +21,7 @@ export const CategoryBox = ({ id }: Props) => {
 
   return (
     <CategoryContainer>
-      <CategoryTab />
+      <CategoryTab id={id} />
       <ul>
         {categories &&
           categories.map((category: ConCategory1) => (
