@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { MAIN_WIDTH } from '@constants';
+import { STYLE } from '@constants';
 
 interface Props {
   image: StaticImageData;
@@ -11,7 +11,7 @@ export const CarouselImage = ({ image }: Props) => {
 
 const CarouselImg = styled.img`
   flex-shrink: 0;
-  width: ${MAIN_WIDTH};
+  width: ${STYLE.MAIN_WIDTH};
   height: 100%;
   object-fit: cover;
 `;

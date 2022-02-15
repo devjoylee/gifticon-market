@@ -12,9 +12,9 @@ export const COLOR = {
 };
 
 export const STYLE = {
+  MAIN_WIDTH: '672px',
   HEADER_H: '60px',
   PADDING: '17px',
 };
-export const MAIN_WIDTH = '672px';
 
 export const CAROUSEL_IMAGES = [starbucks, pizza, burgerking];

@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import { ConItem } from '@types';
-import { COLOR, STYLE } from '@constants';
+import { COLOR } from '@constants';
 
 interface ItemProps {
   item: ConItem;
 }
 
-export const Item = ({ item }: ItemProps) => {
+export const ItemBox = ({ item }: ItemProps) => {
   return (
     <ItemContainer>
       <Thumbnail src={item.imageUrl} />

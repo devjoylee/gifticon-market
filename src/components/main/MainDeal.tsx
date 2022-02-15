@@ -1,12 +1,17 @@
 import styled from '@emotion/styled';
 import { STYLE, COLOR } from '@constants';
-import { Item } from '@components/common';
+import { ItemBox } from '@components/common';
 import { useData } from '@hooks/useData';
 import { ConItem } from '@types';
+import { useState, useEffect } from 'react';
 
 export const MainDeal = () => {
+  const [items, setItems] = useState<ConItem[]>();
   const { data } = useData('con-items/soon');
-  const dataList = data && data[Object.keys(data)[0]];
+
+  useEffect(() => {
+    data && setItems(data.conItems);
+  }, [data]);
 
   return (
     <MainDealContainer>
@@ -15,10 +20,10 @@ export const MainDeal = () => {
         오늘의 땡처리콘!
       </h3>
       <DealItems>
-        {dataList &&
-          dataList.map((item: ConItem) => (
+        {items &&
+          items.map((item: ConItem) => (
             <li key={item.id}>
-              <Item item={item} />
+              <ItemBox item={item} />
             </li>
           ))}
       </DealItems>

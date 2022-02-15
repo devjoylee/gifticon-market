@@ -1,2 +1,2 @@
-export { Item } from './Item';
+export { ItemBox } from './ItemBox';
 export { ConCard } from './ConCard';

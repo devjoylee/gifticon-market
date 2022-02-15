@@ -1,4 +1,4 @@
-import { CAROUSEL_IMAGES, MAIN_WIDTH } from '@constants';
+import { CAROUSEL_IMAGES, STYLE } from '@constants';
 import styled from '@emotion/styled';
 import React, {
   Dispatch,
@@ -88,7 +88,7 @@ const CarouselBoxContainer = styled.div<styleProps>`
   height: 100%;
   transition: all 0.2s ease-in-out;
   transform: ${props =>
-    `translateX(calc(-${props.currentIndex} * ${MAIN_WIDTH}))`};
+    `translateX(calc(-${props.currentIndex} * ${STYLE.MAIN_WIDTH}))`};
 `;
 
 const CarouselUl = styled.ul`
@@ -96,7 +96,7 @@ const CarouselUl = styled.ul`
   cursor: pointer;
   & > img {
     flex-shrink: 0;
-    width: ${MAIN_WIDTH};
+    width: ${STYLE.MAIN_WIDTH};
     height: 100%;
     object-fit: cover;
   }
