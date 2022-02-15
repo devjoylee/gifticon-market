@@ -1,19 +1,26 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import styled from '@emotion/styled';
 import { COLOR } from '@constants';
+import { Options } from '@types';
 
 interface Props {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  selOption?: Options;
 }
 
-export const OptionButton = ({ isOpen, setIsOpen }: Props) => {
+export const OptionButton = ({ isOpen, setIsOpen, selOption }: Props) => {
   const handleOpen = () => {
-    setIsOpen(prev => !prev);
+    if (selOption)
+      window.alert('현재 해당 제품을 구매하실 수 없습니다 죄송합니다.');
+    setIsOpen(true);
   };
   return (
-    <Button className={isOpen ? 'active' : ''} onClick={handleOpen}>
-      {isOpen ? '구매하기' : '옵션 선택하기'}
+    <Button
+      className={isOpen && !selOption ? 'active' : ''}
+      onClick={handleOpen}
+    >
+      {isOpen || selOption ? '구매하기' : '옵션 선택하기'}
     </Button>
   );
 };
@@ -22,7 +29,7 @@ const Button = styled.button`
   position: absolute;
   z-index: 100;
   width: 100%;
-  height: 47px;
+  height: 50px;
   bottom: 0;
   background-color: ${COLOR.RED};
   color: ${COLOR.WHITE};

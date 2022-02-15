@@ -22,6 +22,9 @@ export const Item = ({ id }: Props) => {
       setItemData(data.conItem);
     }
   }, [data]);
+  const handleClose = () => {
+    setIsOpen(false);
+  };
   return (
     itemData && (
       <ItemContainer>
@@ -31,10 +34,17 @@ export const Item = ({ id }: Props) => {
         <OptionList
           options={itemData.options}
           isOpen={isOpen}
+          setIsOpen={setIsOpen}
           dcRate={itemData.discountRate}
+          selOption={selOption}
+          setSelOtion={setSelOtion}
         />
-        <OptionButton isOpen={isOpen} setIsOpen={setIsOpen} />
-        <Modal className={isOpen ? 'active' : ''}></Modal>
+        <OptionButton
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          selOption={selOption}
+        />
+        <Modal className={isOpen ? 'active' : ''} onClick={handleClose}></Modal>
       </ItemContainer>
     )
   );

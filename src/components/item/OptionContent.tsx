@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from '@emotion/styled';
 import { Options } from '@types';
 import { COLOR } from '@constants';
@@ -7,13 +7,17 @@ import { getDate } from '@utils/getDate';
 interface Props {
   option: Options;
   dcRate: number | undefined;
+  setSelOtion: Dispatch<SetStateAction<Options | undefined>>;
 }
 
-export const OptionContent = ({ option, dcRate }: Props) => {
+export const OptionContent = ({ option, dcRate, setSelOtion }: Props) => {
   const date = getDate(option.expireAt);
-  const price = option.sellingPrice.toLocaleString();
+  const price = Number(option.sellingPrice).toLocaleString();
+  const handleClick = () => {
+    setSelOtion(option);
+  };
   return (
-    <OptionBox>
+    <OptionBox onClick={handleClick}>
       <div>
         <MainTop>
           <LabelText>유효기간</LabelText>
@@ -31,9 +35,12 @@ export const OptionContent = ({ option, dcRate }: Props) => {
 
 const OptionBox = styled.li`
   display: flex;
+  flex-shrink: 0;
+  height: 70px;
   padding: 0 17px;
   align-items: center;
   border-bottom: 1px solid ${COLOR.GRAY_BORDER};
+  cursor: pointer;
 `;
 
 const LabelText = styled.span`
@@ -43,8 +50,6 @@ const LabelText = styled.span`
   color: ${COLOR.GRAY_DARK};
   margin-right: 9px;
 `;
-
-const MainBox = styled.div``;
 const MainTop = styled.div`
   display: flex;
   align-items: center;
