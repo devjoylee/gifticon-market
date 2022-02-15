@@ -6,6 +6,7 @@ import { useData } from '@hooks/useData';
 import { ConCategory1 } from '@types';
 import { STYLE } from '@constants';
 import styled from '@emotion/styled';
+import { DealList } from '@components/itemList';
 
 interface Props {
   id: string | string[];
@@ -20,23 +21,25 @@ export const CategoryBox = ({ id }: Props) => {
   }, [data]);
 
   return (
-    <CategoryContainer>
+    <>
       <CategoryTab />
-      <ul>
-        {categories &&
-          categories.map((category: ConCategory1) => (
-            <ConCard key={category.id} category={category} />
-          ))}
-      </ul>
-    </CategoryContainer>
+      {id === '1' ? (
+        <DealList />
+      ) : (
+        <CategoryContainer>
+          {categories &&
+            categories.map((category: ConCategory1) => (
+              <ConCard key={category.id} category={category} />
+            ))}
+        </CategoryContainer>
+      )}
+    </>
   );
 };
 
-const CategoryContainer = styled.section`
-  ul {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 3px;
-    padding: ${STYLE.PADDING};
-  }
+const CategoryContainer = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3px;
+  padding: ${STYLE.PADDING};
 `;
