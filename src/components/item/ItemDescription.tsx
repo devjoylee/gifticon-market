@@ -1,35 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { COLOR } from '@constants';
+import { COLOR, DEFAULT_DESC } from '@constants';
+import { getDescription } from '@utils/getDescription';
+import { Description } from '@types';
 
 interface Props {
-  desc: string;
-}
-interface Description {
-  label: string;
-  text: string;
+  desc?: string;
 }
 
 export const ItemDescription = ({ desc }: Props) => {
-  let descriptions: Description[] = [];
-  const sliceRestricted = desc.replace('\n[사용 불가 매장]\n', '');
-  const splitDesc = sliceRestricted.split('\n\n');
-  const labelRegex = new RegExp('\\[.*\\n', 'g');
-  splitDesc.forEach((text, i) => {
-    const rawLabel = text.match(labelRegex)![0];
-    const labelString = rawLabel.slice(1, rawLabel.length - 2);
-    const descText = text.slice(rawLabel.length).replaceAll('-', '·');
-    const newDesc = { label: labelString, text: descText };
-    descriptions.push(newDesc);
-  });
+  const [descriptions, setDescriptions] = useState<Description[]>();
+  useEffect(() => {
+    if (desc) {
+      const descFetch = async () => {
+        const descResponse = await getDescription(desc);
+        setDescriptions(descResponse);
+      };
+      descFetch();
+    }
+  }, [desc]);
+  console.log(descriptions);
   return (
     <DescContainer>
-      {descriptions.map((data, i) => (
-        <DescBox key={`desc-${i}`}>
-          <Label>{data.label}</Label>
-          <p>{data.text}</p>
-        </DescBox>
-      ))}
+      {descriptions
+        ? descriptions.map((data, i) => (
+            <DescBox key={`desc-${i}`}>
+              <Label>{data.label}</Label>
+              <p>{data.text}</p>
+            </DescBox>
+          ))
+        : DEFAULT_DESC.map((data, i) => (
+            <DescBox key={`desc-${i}`}>
+              <Label>{data.label}</Label>
+              <p>{data.text}</p>
+            </DescBox>
+          ))}
     </DescContainer>
   );
 };
