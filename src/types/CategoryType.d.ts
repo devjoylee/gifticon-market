@@ -1,8 +1,11 @@
+import { ConItem } from './ItemType';
+
 export interface Category {
   id: number;
   name: string;
   discountRate: number;
   imageUrl: string;
+  conItems: ConItem;
 }
 
 export interface ConCategory1 {
@@ -13,6 +16,7 @@ export interface ConCategory1 {
   createdAt?: string;
   priority?: number;
   info?: string;
+  conItems: ConItem;
 }
 
 export interface ConCategory2 {
@@ -25,4 +29,5 @@ export interface ConCategory2 {
   adminUserId?: number;
   priority?: number;
   createdAt?: string;
+  conItems: conItem[];
 }

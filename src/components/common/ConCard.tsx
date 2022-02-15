@@ -2,15 +2,29 @@ import React from 'react';
 import { Category } from '@types';
 import Link from 'next/link';
 import styled from '@emotion/styled';
+import { useRouter } from 'next/router';
 
 interface CategoryProps {
   category: Category;
 }
 
 export const ConCard = ({ category }: CategoryProps) => {
+  const router = useRouter();
+  const categoryId = router.query.id;
+  const href = !!category.conItems
+    ? `/brands/${category.id}`
+    : `/categories/${category.id}`;
+
   return (
     <LinkBox>
-      <Link href={`/categories/${category.id}`} passHref key={category.id}>
+      <Link
+        href={{
+          pathname: href,
+          query: { categoryId: JSON.stringify(categoryId) },
+        }}
+        passHref
+        key={category.id}
+      >
         <a>
           <img src={category.imageUrl} />
           <span>{category.name}</span>
