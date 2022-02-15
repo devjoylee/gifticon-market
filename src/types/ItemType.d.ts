@@ -10,7 +10,7 @@ export interface ConItem {
   ncSellingPrice?: number;
   information?: any;
   tip?: any;
-  warning?: string;
+  warning: string;
   discountRate?: number;
   askingPrice?: number;
   isRefuse?: number;
@@ -19,6 +19,7 @@ export interface ConItem {
   isOnlyAccount?: number;
   conCategory2Id?: number;
   conCategory2?: ConCategory2;
+  options: Options[];
 }
 
 export interface Options {
