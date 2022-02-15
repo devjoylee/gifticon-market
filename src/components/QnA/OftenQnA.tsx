@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { useData } from '@hooks/useData';
 import { COLOR } from '@constants';
-import { QTD } from '@types';
+import { QTDProps } from '@types';
 import { QnAContent } from '.';
 
 interface Toggle {
   toggle: number;
 }
 
-export const OftenQnA = ({ QnATypeData }: QTD) => {
+export const OftenQnA = ({ QnATypeData }: QTDProps) => {
   const [toggle, setToggle] = useState(QnATypeData[0].id);
   const handleBuyBtn = () => {
     if (toggle === QnATypeData[1].id) setToggle(QnATypeData[0].id);
